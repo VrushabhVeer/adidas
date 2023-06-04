@@ -56,7 +56,7 @@ const Womens = () => {
         <SimpleGrid
           mt="5"
           columns={[1, 2, 3, 4]}
-          rowGap={{base:"5", md:"16"}}
+          rowGap={{base:"6", md:"10"}}
           columnGap="2px"
           textAlign="left"
         >
