@@ -40,7 +40,7 @@ To run this project locally, follow these steps:
 
 This project was developed as an individual effort and is currently not open to contributions. However, feel free to fork the repository and customize it to suit your needs.
 
-
+## Preview
 ![addidas](https://github.com/VrushabhVeer/adidas/assets/99570200/b2e360cb-4fe6-4cbe-bb7b-d3f4594d70a7)
 
 
