@@ -34,7 +34,7 @@ To run this project locally, follow these steps:
 2. Navigate to the project directory: `cd app`
 3. Install dependencies: `npm install`
 4. Start the development server: `npm start`
-5. Open your browser and visit `http://localhost:3000`
+5. Open your browser and visit `https://adidas-sportswear.netlify.app`
 
 ## Contribution
 
