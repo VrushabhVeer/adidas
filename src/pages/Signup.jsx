@@ -9,12 +9,61 @@ import {
   InputRightElement,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  const handleSignup = async () => {
+    const data = {
+      name,
+      email,
+      password,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://nice-pink-eagle-robe.cyclic.app/user/signup",
+        data
+      );
+
+      if (response.data.msg === "Email already exists") {
+        toast({
+          title: response.data.msg,
+          description: "please try different email",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Registration Successful!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Registration failed!",
+        description: "please try again.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <>
@@ -41,6 +90,8 @@ const Signup = () => {
               _hover={{ border: "1px solid #444444" }}
               type="text"
               position="static"
+              required
+              onChange={(e) => setName(e.target.value)}
             />
           </FormControl>
           <FormControl id="email" isRequired position="static">
@@ -51,6 +102,8 @@ const Signup = () => {
               _hover={{ border: "1px solid #444444" }}
               type="email"
               position="static"
+              required
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
           <FormControl id="password" isRequired position="static" pb="5">
@@ -61,6 +114,8 @@ const Signup = () => {
                 borderRadius="none"
                 _hover={{ border: "1px solid #444444" }}
                 type={showPassword ? "text" : "password"}
+                required
+                onChange={(e) => setPassword(e.target.value)}
               />
               <InputRightElement h={"full"}>
                 <Button
@@ -86,6 +141,7 @@ const Signup = () => {
             borderRadius="none"
             position="static"
             textTransform="uppercase"
+            onClick={handleSignup}
           >
             Sign up
           </Button>
@@ -94,9 +150,7 @@ const Signup = () => {
         <Text textAlign="center" mt="3">
           Already user go to{" "}
           <span className="link">
-            <Link to="/login">
-              login
-            </Link>
+            <Link to="/login">login</Link>
           </span>
         </Text>
       </Box>

@@ -1,5 +1,7 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
+  Alert,
+  AlertIcon,
   Box,
   Button,
   FormControl,
@@ -9,12 +11,58 @@ import {
   InputRightElement,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  const handleLogin = () => {
+    const payload = {
+      email,
+      password,
+    };
+    console.log(payload);
+
+    axios
+      .post("https://nice-pink-eagle-robe.cyclic.app/user/login", payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        console.log(res.data.token);
+
+        toast({
+          title: "Login Successful!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+
+        toast({
+          title: "Login failed!",
+          description: "please try again.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+  };
+
+  const token = localStorage.getItem("token");
 
   return (
     <>
@@ -28,8 +76,18 @@ const Login = () => {
         Login
       </Text>
       <Text textAlign="center">JOIN ADICLUB. GET REWARDED TODAY.</Text>
+
       <Box w={{ base: "90%", md: "60%", lg: "32%" }} m="auto" mt="8">
-        <Stack spacing={4}>
+        {token ? (
+          <Alert status="warning" fontSize="15px" borderRadius="5" p="2" mt="5">
+            <AlertIcon />
+            you are already login!
+          </Alert>
+        ) : (
+          ""
+        )}
+
+        <Stack spacing={4} mt="3">
           <FormControl position="static" id="email" isRequired>
             <FormLabel>Email address</FormLabel>
             <Input
@@ -38,6 +96,8 @@ const Login = () => {
               _hover={{ border: "1px solid #444444" }}
               type="email"
               position="static"
+              required
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
           <FormControl position="static" id="password" isRequired pb="5">
@@ -48,6 +108,8 @@ const Login = () => {
                 borderRadius="none"
                 _hover={{ border: "1px solid #444444" }}
                 type={showPassword ? "text" : "password"}
+                required
+                onChange={(e) => setPassword(e.target.value)}
               />
               <InputRightElement h={"full"}>
                 <Button
@@ -73,6 +135,7 @@ const Login = () => {
             borderRadius="none"
             textTransform="uppercase"
             position="static"
+            onClick={handleLogin}
           >
             Login
           </Button>
@@ -81,9 +144,7 @@ const Login = () => {
         <Text textAlign="center" mt="3">
           New user go to{" "}
           <span className="link">
-            <Link to="/signup">
-              sign up
-            </Link>
+            <Link to="/signup">sign up</Link>
           </span>
         </Text>
       </Box>

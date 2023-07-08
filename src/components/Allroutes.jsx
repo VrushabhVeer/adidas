@@ -14,6 +14,7 @@ import SingleMen from "../pages/SingleMen";
 import SizeGuide from "../pages/SizeGuide";
 import SingleWomen from "../pages/SingleWomen";
 import SingleShoe from "../pages/SingleShoe";
+import PrivateRoutes from "./PrivateRoutes";
 
 const Allroutes = () => {
   return (
@@ -23,15 +24,36 @@ const Allroutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mens" element={<Mens />} />
-        <Route path="/mensproduct/:product_id" element={<SingleMen />}/>
+        <Route path="/mensproduct/:product_id" element={<SingleMen />} />
         <Route path="/womens" element={<Womens />} />
-        <Route path="/womensproduct/:product_id" element={<SingleWomen />}/>
+        <Route path="/womensproduct/:product_id" element={<SingleWomen />} />
         <Route path="/shoes" element={<Shoes />} />
-        <Route path="/shoes/:product_id" element={<SingleShoe />}/>
+        <Route path="/shoes/:product_id" element={<SingleShoe />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/order_placed" element={<OrderPlaced />} />
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoutes>
+              <Checkout />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            <PrivateRoutes>
+              <Payment />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/order_placed"
+          element={
+            <PrivateRoutes>
+              <OrderPlaced />
+            </PrivateRoutes>
+          }
+        />
         <Route path="/size_guide" element={<SizeGuide />} />
       </Routes>
     </>
