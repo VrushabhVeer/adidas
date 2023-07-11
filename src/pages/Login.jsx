@@ -32,7 +32,7 @@ const Login = () => {
     console.log(payload);
 
     axios
-      .post("https://nice-pink-eagle-robe.cyclic.app/user/login", payload, {
+      .post("https://sleepy-calf-panama-hat.cyclic.app/user/login", payload, {
         headers: {
           "Content-Type": "application/json",
         },
