@@ -15,12 +15,13 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const location = useLocation();
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -47,7 +48,9 @@ const Login = () => {
           duration: 3000,
           isClosable: true,
         });
-        navigate("/");
+
+        const { from } = location.state || { from: { pathname: "/" } };
+        navigate(from);
       })
       .catch((error) => {
         console.error(error);
