@@ -25,7 +25,7 @@ import {
     useEffect(() => {
       axios
         .get(
-          `https://busy-gray-tortoise-wrap.cyclic.app/shoes/${params.product_id}`
+          `https://adidasapi-production.up.railway.app/shoes/${params.product_id}`
         )
         .then((res) => res.data)
         .then((res) => {
