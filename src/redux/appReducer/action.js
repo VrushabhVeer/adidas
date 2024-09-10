@@ -14,7 +14,7 @@ import {
 const getMenProducts = (params) => (dispatch) => {
   dispatch({ type: GET_MENSPRODUCT_REQUEST });
   return axios
-    .get("https://busy-gray-tortoise-wrap.cyclic.app/mensproduct", params)
+    .get("https://adidasapi-production.up.railway.app/mensproduct", params)
     .then((res) => {
       return dispatch({ type: GET_MENSPRODUCT_SUCCESS, payload: res.data });
     })
@@ -28,7 +28,7 @@ export { getMenProducts };
 const getWomenProducts = (params) => (dispatch) => {
   dispatch({ type: GET_WOMENSPRODUCT_REQUEST });
   return axios
-    .get("https://busy-gray-tortoise-wrap.cyclic.app/womensproduct", params)
+    .get("https://adidasapi-production.up.railway.app/womensproduct", params)
     .then((res) => {
       return dispatch({ type: GET_WOMENSPRODUCT_SUCCESS, payload: res.data });
     })
@@ -42,7 +42,7 @@ export { getWomenProducts };
 const getShoesData = (params) => (dispatch) => {
   dispatch({ type: GET_SHOES_REQUEST });
   return axios
-    .get("https://busy-gray-tortoise-wrap.cyclic.app/shoes", params)
+    .get("https://adidasapi-production.up.railway.app/shoes", params)
     .then((res) => {
       return dispatch({ type: GET_SHOES_SUCCESS, payload: res.data });
     })

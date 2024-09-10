@@ -32,7 +32,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "https://sleepy-calf-panama-hat.cyclic.app/user/signup",
+        "https://readit-db-production.up.railway.app/user/signup",
         data
       );
 

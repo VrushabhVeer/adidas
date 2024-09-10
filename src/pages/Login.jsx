@@ -33,7 +33,7 @@ const Login = () => {
     console.log(payload);
 
     axios
-      .post("https://sleepy-calf-panama-hat.cyclic.app/user/login", payload, {
+      .post("https://readit-db-production.up.railway.app/user/login", payload, {
         headers: {
           "Content-Type": "application/json",
         },
